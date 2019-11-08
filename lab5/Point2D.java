@@ -1,5 +1,7 @@
 package com.myjavaproject.lab5;
 
+import javax.swing.*;
+
 public class Point2D extends Point {
     private int y;
 
@@ -17,10 +19,6 @@ public class Point2D extends Point {
         return y;
     }
 
-    public void setY(int y) {
-        this.y = y;
-    }
-
     @Override
     public double distanceToPoint(Object obj) {
         Point2D p2d = (Point2D) obj;
@@ -32,5 +30,19 @@ public class Point2D extends Point {
     @Override
     public double getModule(){
         return Math.sqrt((double)(getX()*getX()+y*y));
+    }
+
+    static public boolean checkOnLine(Point2D ...args){
+        //Point2D[] args = (Point2D[]) arg.clone();
+        if(args.length<=2)
+            return true;
+        for(int i = 2; i<args.length; ++i){
+            double a = (double) (args[i].getX()-args[0].getX())/(double) (args[1].getX()-args[0].getX());
+            double b = (double)(args[i].getY()-args[0].getY())/(double) (args[1].getY()-args[0].getY());
+            if(!(a == b)){
+                return false;
+            }
+        }
+        return true;
     }
 }
