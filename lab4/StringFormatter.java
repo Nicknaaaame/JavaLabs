@@ -4,6 +4,7 @@ import bsh.StringUtil;
 import com.myjavaproject.lab4.exception.ArgsNullException;
 import com.myjavaproject.lab4.exception.ExpressionNullException;
 import com.myjavaproject.lab4.exception.FewArgsException;
+import com.myjavaproject.lab4.exception.ParseArgumentException;
 
 public class StringFormatter {
     private static int num;
@@ -25,7 +26,7 @@ public class StringFormatter {
      * @throws ArgsNullException
      * @throws FewArgsException
      */
-    public static String format(String expression, String... args) throws ExpressionNullException, ArgsNullException, FewArgsException {
+    public static String format(String expression, String... args) throws ExpressionNullException, ArgsNullException, FewArgsException, ParseArgumentException {
         if(expression.isEmpty() || expression==null)
             throw new ExpressionNullException();
 
@@ -39,9 +40,14 @@ public class StringFormatter {
         for(String str : expressionArgs){
             int temp = 0;
             if(str.startsWith("${")&&str.endsWith("}")) {
-                temp = Integer.parseInt(str
-                        .replace("${", "")
-                        .replace("}", ""));
+                try {
+                    temp = Integer.parseInt(str
+                            .replace("${", "")
+                            .replace("}", ""));
+                }
+                catch (Exception e){
+                    throw new ParseArgumentException();
+                }
             }
             if(temp>maxNum)
                 maxNum=temp;

@@ -33,7 +33,7 @@ public class Point2D extends Point {
     }
 
     static public boolean checkOnLine(Point2D ...args){
-        //Point2D[] args = (Point2D[]) arg.clone();
+        //Point2D[] args = (Point2D[]) arg;
         if(args.length<=2)
             return true;
         for(int i = 2; i<args.length; ++i){
