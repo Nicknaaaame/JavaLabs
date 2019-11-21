@@ -1,0 +1,52 @@
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.StackPane?>
+<BorderPane fx:controller="sample.Controller"
+            xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <MenuItem text="Save" onAction="#onSave"/>
+                    <MenuItem text="Open" onAction="#onOpen"/>
+                </Menu>
+            </MenuBar>
+            <HBox spacing="10">
+                <TextField fx:id="brushSize" text="16" prefWidth="50"/>
+                <ColorPicker fx:id="colorPicker" prefWidth="100"/>
+                <Button text="Clear" prefWidth="100" onAction="#onClear"/>
+                    <HBox alignment="CENTER" spacing="10">
+                        <RadioButton text="Brush" selected="true" onAction="#onBrush">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="rbtGroup"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton text="Rectangle" toggleGroup="$rbtGroup" onAction="#onDraw"/>
+                        <RadioButton text="Oval" toggleGroup="$rbtGroup" onAction="#onDraw"/>
+                        <RadioButton text="Triangle" toggleGroup="$rbtGroup" onAction="#onDraw"/>
+                        <RadioButton text="Line" toggleGroup="$rbtGroup" onAction="#onDraw"/>
+                        <RadioButton text="Text" toggleGroup="$rbtGroup" onAction="#onDraw"/>
+                    </HBox>
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <StackPane fx:id="stackPane">
+            <Canvas fx:id="canvas" width="700" height="700" onMousePressed="#onBrush" />
+        </StackPane>
+    </center>
+</BorderPane>
